@@ -8,12 +8,14 @@ struct Population
 	bool* variables = nullptr;
 	size_t size;
 
+	Population() = default;
+	~Population();
+	Population& operator=(const Population& cref);
+	
 	void allocMemory(size_t size);
 	double accuracy(const std::vector<Clause> & clauses) const;
 	inline bool& operator[](size_t index) { return variables[index]; }
 	void randomize();
-	Population() = default;
-	~Population();
 
 	
 };

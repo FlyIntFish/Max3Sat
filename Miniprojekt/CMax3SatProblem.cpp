@@ -43,7 +43,7 @@ void CMax3SatProblem::load(const std::string& filename)
 
 void CMax3SatProblem::afterLoadInit()
 {
-	optimizer = new Optimizer(this, variablesAmount);
+	optimizer = new Optimizer(this);
 }
 
 void CMax3SatProblem::printClauses()

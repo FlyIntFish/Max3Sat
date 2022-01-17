@@ -14,7 +14,14 @@ class Rand
 public:
 
 	static void initRNG();
-	static std::mt19937::result_type getInt() { return nextXorshift32(); };
-	static std::mt19937::result_type getBool() { return static_cast<bool>(getInt() % 2); }
+	static uint32_t getInt()
+	{
+#ifdef XORSHIFT_MODE
+		return nextXorshift32();
+#else
+		return mt();
+#endif
+	};
+	static bool getBool() { return static_cast<bool>(getInt() % 2); }
 
 };

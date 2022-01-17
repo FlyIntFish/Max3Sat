@@ -6,6 +6,13 @@ Population::~Population()
 		delete[] variables;
 }
 
+Population& Population::operator=(const Population& cref)
+{
+	size = cref.size;
+	std::memcpy(variables, cref.variables, size);
+}
+
+
 void Population::allocMemory(size_t size_)
 {
 	size = size_;
