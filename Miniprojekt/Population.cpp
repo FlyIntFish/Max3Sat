@@ -20,5 +20,18 @@ void Population::randomize()
 	}
 }
 
+double Population::accuracy(const std::vector<Clause>& clauses) const
+{
+	Integer passed = 0;
+	Integer failed = 0;
+	for (const auto& i : clauses)
+	{
+		if (i.check(variables[i.val[0]], variables[i.val[1]], variables[i.val[2]]))
+			++passed;
+		else
+			++failed;
+	}
+	return static_cast<double>(passed) / (passed + failed);
+}
 
 

@@ -1,11 +1,8 @@
 #pragma once
 
-#include "VariableNeighbours.h"
-#include "VariableAssignments.h"
 #include "Population.h"
-#include "Clause.h"
-
 #include <map>
+class CMax3SatProblem;
 
 class Optimizer
 {
@@ -26,21 +23,20 @@ class Optimizer
 
 	};
 
-	Optimizer(Integer containerSize);
-	~Optimizer() = default;
-	
-	Optimizer(const Optimizer&) = delete;
-	Optimizer& operator=(const Optimizer&) = delete;
-
-	VariableAssignments assignments;
-	VariableNeighbours neighbours;
-	std::vector<Clause> clauses;
-	size_t variablesAmount = -1;
+	CMax3SatProblem* problemData = nullptr;
 	Generation populations;
-
-	friend class CMax3SatProblem;
+	size_t amountOfPopulations = 0;		// basically size of generation 
+	size_t amountOfVariables = 0;		// amount of clauses is population
+	float mutationProbability = 0.f;	// todo: should I change it to non-zero default values?
+	float crossingProbability = 0.f;
 
 public:
+
+	Optimizer(CMax3SatProblem * problem, Integer variablesInPopulationAmount, Integer amountOfPopulations = AMOUNT_OF_POPULATIONS);
+	Optimizer(const Optimizer&) = delete;
+	~Optimizer() = default;
+	
+	Optimizer& operator=(const Optimizer&) = delete;
 
 
 	

@@ -1,8 +1,16 @@
 #include "CMax3SatProblem.h"
 
-CMax3SatProblem::CMax3SatProblem(Integer sizeOfContainers) : optimizer(sizeOfContainers)
+CMax3SatProblem::CMax3SatProblem(Integer containerSize = DEFAULT_CONTAINER_SIZE) : assignments(containerSize), neighbours(containerSize)
 {
+	clauses.reserve(containerSize);
 }
+
+CMax3SatProblem::~CMax3SatProblem()
+{
+	if (optimizer)
+		delete optimizer;
+}
+
 
 void CMax3SatProblem::load(const std::string& filename)
 {
@@ -22,43 +30,25 @@ void CMax3SatProblem::load(const std::string& filename)
 		val2 = absolute(val2);
 		val3 = absolute(val3);
 			
-		optimizer.clauses.emplace_back( val1, positive1, val2,positive2, val3, positive3 );
-		optimizer.neighbours.insert(val1, val2);
-		optimizer.neighbours.insert(val1, val3);
-		optimizer.neighbours.insert(val2, val1);
-		optimizer.neighbours.insert(val2, val3);
-		optimizer.neighbours.insert(val3, val1);
-		optimizer.neighbours.insert(val3, val2);
+		clauses.emplace_back( val1, positive1, val2,positive2, val3, positive3 );
+		neighbours.insert(val1, val2);
+		neighbours.insert(val1, val3);
+		neighbours.insert(val2, val1);
+		neighbours.insert(val2, val3);
+		neighbours.insert(val3, val1);
+		neighbours.insert(val3, val2);
 	}
-	optimizer.variablesAmount = optimizer.neighbours.neighbours.size();
-	
-	afterLoadInit();	// this may be not the best idea to call this function directly in load
+	variablesAmount = neighbours.neighbours.size();
 }
 
 void CMax3SatProblem::afterLoadInit()
 {
-	optimizer.populations.allocMemory(AMOUNT_OF_POPULATIONS, optimizer.variablesAmount);
+	optimizer = new Optimizer(this, variablesAmount);
 }
-
-
-double CMax3SatProblem::populationAccuracy(Population& population)
-{
-	Integer passed = 0;
-	Integer failed = 0;
-	for(auto & i : optimizer.clauses)
-	{
-		if (i.check(population[i.val[0]], population[i.val[1]], population[i.val[2]]))
-			++passed;
-		else
-			++failed;
-	}
-	return static_cast<double>(passed) / (passed + failed);
-}
-
 
 void CMax3SatProblem::printClauses()
 {
-	for (const auto& i : optimizer.clauses)
+	for (const auto& i : clauses)
 		std::cout << i << "\n";
 }
 

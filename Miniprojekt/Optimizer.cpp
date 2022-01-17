@@ -1,8 +1,9 @@
 #include "Optimizer.h"
 
-Optimizer::Optimizer(Integer containerSize) : assignments(containerSize), neighbours(containerSize)
+Optimizer::Optimizer(CMax3SatProblem* problem, Integer variablesInPopulationAmount, Integer amountOfPopulations):
+	problemData(problem)
 {
-	clauses.reserve(containerSize);
+	populations.allocMemory(amountOfPopulations, variablesInPopulationAmount);
 }
 
 Optimizer::Generation::~Generation()

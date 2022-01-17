@@ -11,7 +11,7 @@ std::ostream& operator<<(std::ostream& stream, const Clause& c)
 	return stream;
 }
 
-bool Clause::check(bool val1, bool val2, bool val3)
+bool Clause::check(bool val1, bool val2, bool val3) const 
 {
 	return ((!(val1 ^ firstPositive)) || (!(val2 ^ secondPositive)) || (!(val3 ^ thirdPositive)));
 }
