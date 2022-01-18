@@ -44,6 +44,7 @@ void CMax3SatProblem::load(const std::string& filename)
 void CMax3SatProblem::afterLoadInit()
 {
 	optimizer = new Optimizer(this);
+	optimizer->initialize();
 }
 
 void CMax3SatProblem::printClauses()
@@ -52,7 +53,21 @@ void CMax3SatProblem::printClauses()
 		std::cout << i << "\n";
 }
 
+float CMax3SatProblem::compute(bool* array, size_t size) const
+{
+	Integer passed = 0;
+	Integer failed = 0;
+	for (const auto& i : clauses)
+	{
+		if (i.check(array[i.val[0]], array[i.val[1]], array[i.val[2]]))
+			++passed;
+		else
+			++failed;
+	}
+	return static_cast<double>(passed) / (passed + failed);
+}
 
-
-
-
+int* CMax3SatProblem::getBestResult(int& size) const
+{
+	return optimizer->getBestResult(size);
+}

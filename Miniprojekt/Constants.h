@@ -39,13 +39,14 @@ template <typename T, typename R>
 using Map = std::unordered_map<T, R>;
 
 constexpr Integer DEFAULT_CONTAINER_SIZE = 500;
-constexpr size_t AMOUNT_OF_POPULATIONS = 200;
-constexpr size_t BOTTOM_PARENTS_LIMIT = AMOUNT_OF_POPULATIONS * 0.75;
+constexpr size_t AMOUNT_OF_POPULATIONS = 300;
 constexpr size_t AMOUNT_OF_GENERATIONS = 5;
-constexpr int DEFAULT_CROSSING_PROBABILITY = 50;
-constexpr int DEFAULT_MUTATION_PROBABILITY = 50;
+constexpr int DEFAULT_CROSSING_PROBABILITY = 70;
+constexpr int DEFAULT_MUTATION_PROBABILITY = 75;
 constexpr int DEFAULT_AMOUNT_OF_GENES_TO_MUTATE = 20;
-constexpr int DEFAULT_TOURNAMENT_SIZE = 2;
+constexpr int DEFAULT_MIGRATION_PROBABILITY = 0;
+constexpr int DEFAULT_TOURNAMENT_SIZE = 5;
+constexpr int DEFAULT_ELITISM_VARIABLE = 5;
 
 Integer fastAbs(Integer value);
 
