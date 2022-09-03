@@ -14,7 +14,7 @@ class Rand
 public:
 
 	static void initRNG();
-	static uint32_t getInt()
+	static uint32_t getUInt()
 	{
 #ifdef XORSHIFT_MODE
 		return nextXorshift32();
@@ -22,6 +22,6 @@ public:
 		return mt();
 #endif
 	};
-	static bool getBool() { return static_cast<bool>(getInt() % 2); }
+	static bool getBool() { return static_cast<bool>(getUInt() % 2); }
 
 };

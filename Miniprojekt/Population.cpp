@@ -1,23 +1,16 @@
 #include "Population.h"
 
-Population::~Population()
-{
-	if (variables)
-		delete[] variables;
-}
-
 Population& Population::operator=(const Population& cref)
 {
 	size = cref.size;
-	std::memcpy(variables, cref.variables, size);
+	std::memcpy(variables.get(), cref.variables.get(), size);
 	return *this;
 }
-
 
 void Population::allocMemory(size_t size_)
 {
 	size = size_;
-	variables = new bool[size_]{};
+	variables = std::make_unique<bool[]>(size_);
 }
 
 void Population::randomize()
@@ -27,5 +20,3 @@ void Population::randomize()
 		variables[i] = Rand::getBool();
 	}
 }
-
-

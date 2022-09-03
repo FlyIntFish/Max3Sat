@@ -1,16 +1,10 @@
+#include <fstream>
 #include "CMax3SatProblem.h"
 
-CMax3SatProblem::CMax3SatProblem(Integer containerSize = DEFAULT_CONTAINER_SIZE) : assignments(containerSize), neighbours(containerSize)
+CMax3SatProblem::CMax3SatProblem(UInteger containerSize = DEFAULT_CONTAINER_SIZE) : assignments(containerSize), neighbours(containerSize)
 {
 	clauses.reserve(containerSize);
 }
-
-CMax3SatProblem::~CMax3SatProblem()
-{
-	if (optimizer)
-		delete optimizer;
-}
-
 
 void CMax3SatProblem::load(const std::string& filename)
 {
@@ -43,7 +37,7 @@ void CMax3SatProblem::load(const std::string& filename)
 
 void CMax3SatProblem::afterLoadInit()
 {
-	optimizer = new Optimizer(this);
+	optimizer = std::make_unique<COptimizer>(this);
 	optimizer->initialize();
 }
 
@@ -53,7 +47,7 @@ void CMax3SatProblem::printClauses()
 		std::cout << i << "\n";
 }
 
-float CMax3SatProblem::compute(bool* array, size_t size) const
+double CMax3SatProblem::compute(bool* array, size_t size) const
 {
 	Integer passed = 0;
 	Integer failed = 0;
@@ -67,7 +61,7 @@ float CMax3SatProblem::compute(bool* array, size_t size) const
 	return static_cast<double>(passed) / (passed + failed);
 }
 
-int* CMax3SatProblem::getBestResult(int& size) const
+const std::unique_ptr<int[]>& CMax3SatProblem::getBestResult(UInteger& size) const
 {
 	return optimizer->getBestResult(size);
 }

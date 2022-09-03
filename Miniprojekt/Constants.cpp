@@ -1,6 +1,6 @@
 #include "Constants.h"
 
-Integer fastAbs(Integer value)
+UInteger fastAbs(Integer value)
 {
 	UInteger temp = value >> (sizeof(UInteger)*8-1);
 	value ^= temp;

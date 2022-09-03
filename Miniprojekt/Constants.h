@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cassert>
 #include <random>
+#include <cstdint>
 #include <unordered_map>
 
 /**********************************
@@ -29,8 +30,8 @@
 std::cerr<<__FILE__<<" line:"<<__LINE__<<"\tassertion: "<<#exp;\
 abort();}
 
-using Integer = short;
-using UInteger = unsigned short;
+using Integer = int16_t;
+using UInteger = uint16_t;
 
 template <typename T>
 using Set = std::unordered_set<T>;
@@ -38,17 +39,17 @@ using Set = std::unordered_set<T>;
 template <typename T, typename R>
 using Map = std::unordered_map<T, R>;
 
-constexpr Integer DEFAULT_CONTAINER_SIZE = 500;
-constexpr size_t AMOUNT_OF_POPULATIONS = 300;
-constexpr size_t AMOUNT_OF_GENERATIONS = 5;
-constexpr int DEFAULT_CROSSING_PROBABILITY = 70;
-constexpr int DEFAULT_MUTATION_PROBABILITY = 75;
-constexpr int DEFAULT_AMOUNT_OF_GENES_TO_MUTATE = 20;
-constexpr int DEFAULT_MIGRATION_PROBABILITY = 0;
-constexpr int DEFAULT_TOURNAMENT_SIZE = 5;
-constexpr int DEFAULT_ELITISM_VARIABLE = 5;
+constexpr UInteger AMOUNT_OF_POPULATIONS = 300;
+constexpr UInteger AMOUNT_OF_GENERATIONS = 5;
+constexpr UInteger DEFAULT_CONTAINER_SIZE = 500;
+constexpr UInteger DEFAULT_CROSSING_PROBABILITY = 70;
+constexpr UInteger DEFAULT_MUTATION_PROBABILITY = 75;
+constexpr UInteger DEFAULT_AMOUNT_OF_GENES_TO_MUTATE = 20;
+constexpr UInteger DEFAULT_MIGRATION_PROBABILITY = 0;
+constexpr UInteger DEFAULT_TOURNAMENT_SIZE = 5;
+constexpr UInteger DEFAULT_ELITISM_VARIABLE = 5;
 
-Integer fastAbs(Integer value);
+UInteger fastAbs(Integer value);
 
 #define absolute(x) fastAbs(x)
 
