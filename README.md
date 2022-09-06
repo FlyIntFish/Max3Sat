@@ -40,5 +40,6 @@ Next **n** lines represent **n** variables (number and value), e.g. (file m3s_15
 11        1
 12        0
 13        1
+...
 ```
 99,6875% clauses were fulfilled, i.e. 638 passed, 2 failed.
