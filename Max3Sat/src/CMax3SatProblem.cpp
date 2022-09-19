@@ -32,7 +32,7 @@ void CMax3SatProblem::load(const std::string& filename)
 		neighbours.insert(val3, val1);
 		neighbours.insert(val3, val2);
 	}
-	variablesAmount = neighbours.neighbours.size();
+	variablesAmount = static_cast<UInteger>(neighbours.neighbours.size());
 }
 
 void CMax3SatProblem::afterLoadInit()

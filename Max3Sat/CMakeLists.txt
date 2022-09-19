@@ -1,6 +1,17 @@
-﻿cmake_minimum_required (VERSION 3.8)
-project ("Max3Sat")
+﻿cmake_minimum_required (VERSION 3.0)
+project ("Max3Sat" VERSION 1.0)
+set_property(GLOBAL PROPERTY USE_FOLDERS On)
+
+file(GLOB SOURCES "src/*")
+file(GLOB INCLUDE "include/*")
+
+source_group("include" FILES ${INCLUDE})
+source_group("src" FILES ${SOURCES})
 
 add_executable(max3sat
-"Clause.h" "CMax3SatProblem.h" "Constants.h" "Population.h" "Rand.h" "VariableAssignments.h" "VariableNeighbours.h"
- "Clause.cpp" "CMax3SatProblem.cpp" "Constants.cpp" "Max3Sat.cpp" "Population.cpp" "Rand.cpp" "VariableAssignments.cpp" "VariableNeighbours.cpp" "COptimizer.cpp" "COptimizer.h")
+${SOURCES}
+${INCLUDE}              # for visibility of header files in VS IDE
+)
+
+target_include_directories(max3sat PUBLIC include)
+set_property(TARGET max3sat PROPERTY CXX_STANDARD 11)

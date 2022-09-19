@@ -37,7 +37,7 @@ class COptimizer
 	UInteger migrationProbability = DEFAULT_MIGRATION_PROBABILITY;
 	UInteger amountOfGenesToMutate = DEFAULT_AMOUNT_OF_GENES_TO_MUTATE;
 	UInteger elitismVariable = DEFAULT_ELITISM_VARIABLE;
-	float bestAccuracy = 0.f;
+	double bestAccuracy = 0.0;
 	
 	Population* tournment(Generation & generation);
 	void cross(Generation & parentsGen, Population& child1, Population& child2);
