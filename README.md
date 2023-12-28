@@ -6,7 +6,7 @@
 ## How to run
 In order to run the application you need to pass two arguments:
   1.  Path to the file with its name (e.g. dir1/dir2/input.txt)
-  2.  Amount of iterations (more = better, but lasts longer)
+  2.  Number of iterations (more = better, but lasts longer)
   
 ## Input files
 
